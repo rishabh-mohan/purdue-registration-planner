@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Purdue Course Request Planner",
+  "version": "1.0.0",
+  "description": "Plan course request priorities and preview a weekly timetable alongside Purdue UniTime.",
+  "minimum_chrome_version": "114",
+  "permissions": ["sidePanel", "storage"],
+  "host_permissions": ["https://timetable.mypurdue.purdue.edu/*"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Open Course Request Planner"
+  },
+  "side_panel": {
+    "default_path": "panel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://timetable.mypurdue.purdue.edu/*"],
+      "js": ["bridge.js", "page-preview.js", "registration-bridge.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["panel.html"],
+      "matches": ["https://timetable.mypurdue.purdue.edu/*"]
+    }
+  ]
+}

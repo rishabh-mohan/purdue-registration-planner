@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Request Planner</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">P</div>
+    <div class="brand-copy"><p class="eyebrow">PURDUE · COURSE REQUESTS</p><h1>Schedule planner</h1></div>
+    <button id="refreshButton" class="icon-button" title="Refresh selected courses" aria-label="Refresh selected courses">↻</button>
+  </header>
+  <main>
+    <section class="connection-card" aria-live="polite">
+      <span id="connectionDot" class="status-dot"></span>
+      <div><strong id="connectionTitle">Looking for Course Request Form</strong><p id="connectionMessage">Open your UniTime course requests to sync preferred classes.</p></div>
+    </section>
+    <section class="schedule-section">
+      <div class="section-heading"><div><p class="eyebrow">WEEK AT A GLANCE</p><h2>Your timetable</h2></div><label class="toggle"><input id="showAlternates" type="checkbox"><span>Show alternates</span></label></div>
+      <div id="alternateScenarios" class="alternate-scenarios" hidden></div>
+      <div id="conflictSummary" class="conflict-summary" hidden></div>
+      <div class="calendar-wrap"><div id="calendar" class="calendar" aria-label="Weekly timetable"></div></div>
+      <p class="calendar-note">Add meeting times below to place courses on the calendar.</p>
+    </section>
+    <section class="courses-section">
+      <div class="section-heading course-heading"><div><p class="eyebrow">COURSE REQUESTS</p><h2>Selected courses <span id="courseCount" class="count">0</span></h2></div><button id="addCourseButton" class="primary-button">＋ Add course</button></div>
+      <div id="courseList" class="course-list"></div>
+      <div id="emptyState" class="empty-state"><span class="empty-icon">＋</span><strong>Build your schedule</strong><p>Classes selected in UniTime will appear here. Add meeting times to see them on the calendar.</p></div>
+    </section>
+    <section id="courseEditor" class="editor" hidden>
+      <div class="section-heading"><div><p class="eyebrow">PLANNER DETAILS</p><h2 id="editorTitle">Add a course</h2></div><button id="closeEditor" class="icon-button" aria-label="Close editor">×</button></div>
+      <form id="courseForm">
+        <div class="form-row"><label>Course code<input id="courseCode" required maxlength="32" placeholder="CS 18000" autocomplete="off"></label><label class="title-field">Course title<input id="courseTitle" maxlength="100" placeholder="Problem Solving and Object-Oriented Programming"></label></div>
+        <div class="meeting-head"><strong>Meeting time</strong><button type="button" id="addMeeting" class="text-button">＋ Add another</button></div>
+        <div id="meetingRows"></div>
+        <div class="form-actions"><button type="button" id="deleteCourse" class="delete-button" hidden>Remove course</button><span></span><button type="button" id="cancelEditor" class="secondary-button">Cancel</button><button class="primary-button" type="submit">Save course</button></div>
+      </form>
+    </section>
+    <footer><p>Use this planner to compare options. Submit your official requests in UniTime.</p></footer>
+  </main>
+  <template id="meetingTemplate"><div class="meeting-row">
+    <div class="day-picker" role="group" aria-label="Meeting days"><label><input type="checkbox" value="Mon"><span>M</span></label><label><input type="checkbox" value="Tue"><span>T</span></label><label><input type="checkbox" value="Wed"><span>W</span></label><label><input type="checkbox" value="Thu"><span>Th</span></label><label><input type="checkbox" value="Fri"><span>F</span></label><label><input type="checkbox" value="Sat"><span>Sa</span></label><label><input type="checkbox" value="Sun"><span>Su</span></label></div>
+    <div class="time-fields"><label>Starts<input class="meeting-start" type="time" required value="09:00"></label><label>Ends<input class="meeting-end" type="time" required value="09:50"></label></div>
+    <label class="location-field">Location<input class="meeting-location" maxlength="80" placeholder="Building / room"></label><button type="button" class="remove-meeting" aria-label="Remove meeting">×</button>
+  </div></template>
+  <script type="module" src="panel.js"></script>
+</body>
+</html>

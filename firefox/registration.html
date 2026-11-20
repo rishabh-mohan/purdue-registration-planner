@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111c35"><title>Purdue Registration Planner</title><link rel="stylesheet" href="registration.css"></head>
+<body>
+<header>
+  <div class="brand"><span class="logo" aria-hidden="true">P</span><div><h1>Registration planner</h1><p>Compare UniTime alternatives before submitting your schedule.</p></div></div>
+  <button id="theme-toggle" class="ghost" type="button" aria-pressed="false">Dark mode</button>
+</header>
+<main>
+  <div id="service-issue" class="service-issue" role="alert" hidden></div>
+  <aside class="sidebar">
+    <section class="panel" id="live-source" aria-label="UniTime source">
+      <h2>Source</h2>
+      <label>UniTime tab <select id="source"></select></label>
+      <div class="row"><button id="refresh" class="secondary" type="button">Refresh</button><a id="open-sandbox" class="link-button" href="registration.html?sandbox=1" target="_blank" rel="noopener">Open sandbox</a></div>
+    </section>
+    <section id="sandbox-banner" class="panel sandbox-banner" aria-label="Offline sandbox" hidden>
+      <h2>Offline sandbox</h2>
+      <p>Practice with sample classes and alternatives. Changes stay in this tab.</p>
+      <div class="row"><button id="sandbox-undo" class="secondary" type="button" disabled>Undo sandbox change</button><button id="sandbox-reset" class="secondary" type="button">Reset sandbox</button></div>
+    </section>
+    <form id="preferences" class="panel">
+      <h2>Preferences</h2>
+      <label>Section to optimize <select id="target"></select></label>
+      <label>Preferred instructor for selected class <select id="instructor"><option value="">Any instructor</option></select></label>
+      <label>Earliest preferred start <input id="earliest" type="time" value="13:30" required></label>
+      <div class="row two">
+        <label>Rank first <select id="first"><option value="instructor">Instructor</option><option value="time">Start time</option><option value="days">Fewer class days</option><option value="gaps">Shorter gaps</option><option value="buildings">Fewer building changes</option></select></label>
+        <label>Then <select id="second"><option value="time">Start time</option><option value="instructor">Instructor</option><option value="days">Fewer class days</option><option value="gaps">Shorter gaps</option><option value="buildings">Fewer building changes</option></select></label>
+      </div>
+      <button id="load" class="primary" type="button">Load UniTime alternatives</button>
+      <button id="browse-courses" class="secondary" type="button">Browse new classes</button>
+      <button id="remove-class" class="secondary danger" type="button">Remove selected class</button>
+    </form>
+    <details id="builder" class="panel" hidden>
+      <summary>Plan around these classes</summary>
+      <label>Course codes <textarea id="builder-codes" rows="4" placeholder="CS 18000&#10;MA 16100"></textarea></label>
+      <button id="build-schedules" class="primary" type="button">Build schedules</button>
+    </details>
+  </aside>
+  <div class="content">
+    <p id="status" class="status" role="status"></p>
+    <section class="panel timetable" aria-labelledby="timetable-title">
+      <div class="panel-head"><h2 id="timetable-title">Week</h2><p class="hint">Click a class to load alternatives. Dashed cards show proposed meetings.</p></div>
+      <p id="details" class="details"></p>
+      <div id="comparison" class="comparison" aria-label="Current and selected schedule comparison" hidden></div>
+      <ul id="preview-warnings" aria-label="Selected schedule warnings"></ul>
+      <section id="week" aria-label="Weekly timetable"></section>
+      <section id="online" aria-label="Asynchronous classes"></section>
+    </section>
+    <section id="course-browser" class="panel" aria-labelledby="course-browser-title" hidden>
+      <div class="panel-head"><h2 id="course-browser-title">Browse new classes</h2><button id="close-course-browser" class="ghost" type="button">Close class browser</button></div>
+      <div class="row search"><label>Search classes <input id="course-filter" type="search" placeholder="Course code or title"></label><button id="search-courses" class="secondary" type="button">Search</button></div>
+      <div id="wishlist" class="row" hidden><label>Paste wishlist <textarea id="wish-paste" rows="3" placeholder="CS 18000&#10;MA 16100"></textarea></label><button id="wish-use" class="secondary" type="button">Use in planner</button></div>
+      <div id="course-results" class="options"></div>
+      <button id="add-course" class="primary" type="button" disabled>Add to sandbox schedule</button>
+    </section>
+    <section id="alternatives" class="panel" aria-labelledby="alternatives-title">
+      <div class="panel-head"><h2 id="alternatives-title">Schedule alternatives</h2></div>
+      <p id="alternatives-status" class="hint"></p>
+      <div id="saved" class="row saved" aria-label="Saved options"></div>
+      <div id="options" class="options"></div>
+      <div class="row action-bar">
+        <button id="save-option" class="secondary" type="button" disabled>Save option</button>
+        <button id="export-ics" class="secondary" type="button">Export calendar (.ics)</button>
+        <button id="apply" class="primary" type="button" aria-describedby="apply-help" disabled>Apply selected to UniTime draft</button>
+        <button id="close-options" class="secondary" type="button">Close alternatives</button>
+        <p id="apply-help"></p>
+      </div>
+    </section>
+  </div>
+</main>
+<script type="module" src="registration.js"></script>
+</body></html>

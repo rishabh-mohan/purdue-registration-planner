@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Purdue Registration Planner",
+  "version": "1.0.0",
+  "description": "Compare Scheduling Assistant alternatives in a separate Firefox tab.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "purdue-registration-planner@local",
+      "strict_min_version": "127.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "host_permissions": [
+    "https://timetable.mypurdue.purdue.edu/*"
+  ],
+  "background": {
+    "scripts": [
+      "registration-background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://timetable.mypurdue.purdue.edu/*"
+      ],
+      "js": [
+        "registration-bridge.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
